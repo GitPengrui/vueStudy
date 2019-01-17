@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click='run'>点我跑</button>
+        <button @click='stop'>点我停</button>
+        <p>{{msg}}</p>
+    </div>
+<script>
+    new Vue ({
+        el: '#app',
+        data: {
+            msg: '今天天气好晴朗,处处好风光',
+            timeId: null
+        },
+        methods: {
+            run () {
+                clearInterval(this.timeId)
+                this.timeId = setInterval( () => {
+                    let start = this.msg.substring(0,1)
+                    let end = this.msg.substring(1)
+                    this.msg = end + start
+                },500)
+            },
+            stop () {
+                clearInterval(this.timeId)
+            }
+        }
+    })
+</script>
+</body>
+</html>
