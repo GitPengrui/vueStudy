@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h3>{{msg | aa('笨蛋')}}</h3>
+    </div>
+</body>
+<script>
+    Vue.filter('aa', function (haveData, str) {
+        // console.log(data)
+        // console.log(str)
+        return haveData.replace('世界', str)
+    })
+
+    new Vue({
+        el: '#app',
+        data: {
+            msg: '你好啊世界'
+        }
+    })
+</script>
+</html>
