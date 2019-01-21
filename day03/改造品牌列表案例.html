@@ -67,17 +67,50 @@
 
             ]
         },
+        created() {
+            this.getAll()
+        },
         methods: {
-            getAll () {
-                this.$http.get('vue.lovegf.cn:8899/api/getnewslist').then(result => {
+            getAll() {
+                this.$http.get('http://vue.lovegf.cn:8899/api/getprodlist')
+                .then(result => {
+                    // console.log(result)
                     if (result.body.status === 0) {
                         // 成功了
-                    }else {
+                        this.list = result.body.message.splice(result.body.message.length-20, result.body.message.length)
+                    } else {
                         // 失败了
+                        alert('获取数据失败!')
+                    }
+                })
+            },
+            add() {
+                // http://vue.studyit.io/api/addproduct
+                this.$http.post('http://vue.lovegf.cn:8899/api/addproduct', {name: this.name})
+                .then(result => {
+                    // console.log(result)
+                    if (result.body.status === 0) {
+                        this.getAll()
+                        this.name = ''
+                    }else {
+                        alert('添加数据失败!')
+                    }
+                })
+            },
+            del(id) {
+                // http://vue.studyit.io/api/delproduct/:id
+                this.$http.get('http://vue.lovegf.cn:8899/api/delproduct/' + id)
+                .then(result => {
+                    // console.log(result)
+                    if (result.body.status === 0) {
+                        this.getAll()
+                    }else {
+
                     }
                 })
             }
-        },
+        }
     })
 </script>
+
 </html>
