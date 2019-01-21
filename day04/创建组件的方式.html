@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <mycom></mycom>
+        <mycom2></mycom2>
+
+        <template id="tem">
+            <div>
+                <h1>哈哈哈哈</h1>
+                <span>啊啊啊啊</span>
+            </div>
+        </template>
+
+    </div>
+</body>
+<script>
+
+    Vue.component('mycom', Vue.extend({
+        template: '<h1> 我是你爸爸 </h1>'
+    }))
+
+    Vue.component('mycom2', {
+        template: '<div><h1> 我是你爷爷 </h1> <h6> 我是你爹 </h6></div>'
+    })
+
+    Vue.component('mycom3', {
+        template: '#tem'
+    })
+
+    new Vue({
+        el: '#app',
+        data: {},
+        methods: {}
+    })
+</script>
+</html>

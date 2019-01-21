@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+
+    <style>
+        li{
+            border: 1px dashed #ccc;
+            height: 40px;
+            line-height: 40px;
+            padding-left: 10px;
+            margin-top: 5px;
+        }
+
+        li:hover{
+            background-color: #eee;
+            transition: all .5s ease;
+        }
+
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translateY(80px)
+        }
+
+        .v-enter-active,
+        .v-leave-active,
+        .v-move {
+            transition: all 1s ease;
+        }
+
+        .v-leave-active {
+            position: absolute;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <label>
+                Id:
+                <input type="text" v-model="id">
+            </label>
+
+            <label>
+                Name:
+                <input type="text" v-model="name">
+            </label>
+
+            <input type="button" value="添加" @click="add">
+        </div>
+
+        <div>
+            <transition-group tag="ul" appear>
+                <li v-for="(item, index) in list" :key="item.id" @click="del(index)">
+                    {{item.id}} ---- {{item.name}}
+                </li>
+            </transition-group>
+        </div>
+
+    </div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            id: '',
+            name: '',
+            list: [
+                { id: 1, name: 'zs' },
+                { id: 2, name: 'ls' },
+                { id: 3, name: 'ww' },
+                { id: 4, name: 'll' }
+            ]
+        },
+        methods: {
+            add() {
+                this.list.push({ id: this.id, name: this.name })
+                this.id = this.name = ''
+            },
+            del(index) {
+                this.list.splice(index, 1)
+            }
+        }
+    })
+</script>
+
+</html>
