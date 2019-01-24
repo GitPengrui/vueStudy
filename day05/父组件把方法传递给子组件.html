@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <com2 @postcomplate="show"></com2>
+    </div>
+
+    <template id="templ">
+        <div>
+            <h2>我是子组件</h2>
+            <input type="button" value="点击传递方法" @click="myclick">
+        </div>
+    </template>
+
+</body>
+
+</html>
+<script>
+
+    // var com2 = {
+    //     template: '#templ',
+    //     data() {
+    //         return {
+    //             usermsg: { age: 18, name: 'zs' }
+    //         }
+    //     },
+    //     methods: {
+    //         myclick() {
+    //             this.$emit('postcomplate', this.usermsg)
+    //         }
+    //     },
+    // }
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            datamsgFormSon: null
+        },
+        methods: {
+            show(data) {
+                this.datamsgFormSon = data
+            }
+        },
+        components: {
+            com2: {
+                template: '#templ',
+                data() {
+                    return {
+                        usermsg: { age: 18, name: 'zs' }
+                    }
+                },
+                methods: {
+                    myclick() {
+                        this.$emit('postcomplate', this.usermsg)
+                    }
+                }
+            }
+        }
+    })
+</script>

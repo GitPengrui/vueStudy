@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <com1 :parentmsg="msg"></com1>
+    </div>
+</body>
+
+</html>
+<script>
+
+
+
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            msg: '我是父组件'
+        },
+        methods: {},
+        components: {
+            com1: {
+                template: '<h1 @click="change">我是子组件 ----- {{parentmsg}}</h1>',
+                props: ['parentmsg'],
+                methods: {
+                    change() {      //会报警告, 原因: 单向向下绑定
+                        this.parentmsg = '被修改了'
+                    }
+                }
+            }
+        }
+    })
+</script>
